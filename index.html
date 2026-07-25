@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kidd's Auto Repair | Somerset, KY | Cars, Trucks, Side-by-Sides</title>
+<meta name="description" content="Kidd's Auto Repair in Somerset, Kentucky. Brakes, suspension, engine, driveline, ATV and UTV work, and custom motorcycle builds. Call (606) 875-8154.">
+<!-- On deploy, add: <link rel="canonical" href="https://YOURDOMAIN.com/">
+     and change og:image below to the full https:// URL of the logo. -->
+<link rel="icon" href="images/favicon.png" type="image/png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kidd's Auto Repair | Somerset, KY">
+<meta property="og:description" content="Cars, trucks, side-by-sides, and motorcycles. Somerset, Kentucky. Call (606) 875-8154.">
+<meta property="og:image" content="images/kidds-logo.jpg">
+<meta name="theme-color" content="#1C2532">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --navy:#2E3A4C;
+  --navy-deep:#1C2532;
+  --navy-line:#3C4A5E;
+  --red:#CE4034;        /* actions + fills: AA with white text */
+  --red-deep:#C33A2F;   /* small red text on light backgrounds */
+  --red-bright:#E8574A; /* hover */
+  --red-pale:#FF7A69;   /* labels on navy */
+  --bone:#EDEBE6;
+  --paper:#FFFFFF;
+  --steel:#8A93A0;
+  --ink:#1A1F26;
+
+  --wrap:1180px;
+  --pad:20px;
+  --radius:4px;
+
+  --display:'Archivo',system-ui,sans-serif;
+  --util:'Barlow Condensed',system-ui,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.6;
+  color:var(--ink);
+  background:var(--paper);
+  padding-bottom:100px; /* clearance for mobile call bar */
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+
+:focus-visible{outline:3px solid var(--red-bright); outline-offset:3px}
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:200;
+  background:var(--red); color:#fff; padding:12px 18px; font-weight:700;
+}
+.skip:focus{left:0}
+
+.wrap{width:100%; max-width:var(--wrap); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad)}
+
+section[id]{scroll-margin-top:70px}
+
+/* ============================================================
+   TYPE SCALE
+   ============================================================ */
+h1,h2,h3{margin:0; font-weight:900; line-height:1.05; letter-spacing:-0.02em}
+h1{font-size:clamp(2rem,7.5vw,3.6rem)}
+h2{font-size:clamp(1.6rem,5.5vw,2.5rem)}
+h3{font-size:1.1rem; font-weight:800; letter-spacing:-0.01em}
+p{margin:0 0 1rem}
+
+.eyebrow{
+  font-family:var(--util);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:.95rem;
+  color:var(--red-deep);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 14px;
+}
+.eyebrow::after{content:""; flex:1; height:2px; background:currentColor; opacity:.28}
+.eyebrow--light{color:var(--red-pale)}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--display); font-weight:800; font-size:1.05rem;
+  padding:16px 26px; border-radius:var(--radius);
+  text-decoration:none; border:2px solid transparent;
+  transition:background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.btn--call{background:var(--red); color:#fff}
+.btn--call:hover{background:var(--red-bright)}
+.btn--ghost{background:transparent; color:#fff; border-color:rgba(255,255,255,.4)}
+.btn--ghost:hover{border-color:#fff; background:rgba(255,255,255,.08)}
+.btn--dark{background:var(--navy); color:#fff}
+.btn--dark:hover{background:var(--navy-deep)}
+.btn--outline{background:transparent; color:var(--navy); border-color:var(--navy)}
+.btn--outline:hover{background:var(--navy); color:#fff}
+.btn--wide{width:100%}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.top{
+  position:sticky; top:0; z-index:80;
+  background:var(--navy-deep);
+  border-bottom:1px solid var(--navy-line);
+}
+.top__inner{display:flex; align-items:center; gap:14px; min-height:60px}
+.top__mark{
+  width:38px; height:38px; border-radius:3px; object-fit:cover; flex:none;
+  border:1px solid var(--navy-line);
+}
+.top__name{
+  font-family:var(--util); font-weight:700; text-transform:uppercase;
+  letter-spacing:.06em; font-size:1.15rem; color:#fff; line-height:1.1;
+}
+.top__nav{display:none}
+.top__cta{display:none}
+
+.status{
+  margin-left:auto; display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--util); font-weight:600; text-transform:uppercase;
+  letter-spacing:.08em; font-size:.85rem; color:var(--bone);
+  white-space:nowrap;
+}
+.status__dot{width:9px; height:9px; border-radius:50%; background:var(--steel); flex:none}
+.status.is-open .status__dot{background:#4ED07A}
+.status.is-closed .status__dot{background:var(--red-bright)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{background:var(--navy-deep); color:#fff; padding:52px 0 56px}
+.hero h1{color:#fff; max-width:16ch}
+.hero__lede{
+  font-size:1.1rem; color:#C8CED8; margin:16px 0 26px; max-width:46ch;
+}
+.hero__actions{display:flex; flex-direction:column; gap:12px}
+.hero__meta{
+  margin-top:30px; padding-top:22px; border-top:1px solid var(--navy-line);
+  display:flex; flex-wrap:wrap; gap:10px 40px;
+  font-family:var(--util); font-size:1.05rem; letter-spacing:.03em; color:#AFB8C4;
+}
+.hero__meta strong{color:#fff; font-weight:600}
+
+/* ============================================================
+   TRUST STRIP
+   ============================================================ */
+.trust{background:var(--red); color:#fff}
+.trust__grid{display:grid; gap:2px; padding:0}
+.trust__item{padding:18px 0}
+.trust__item + .trust__item{border-top:1px solid rgba(255,255,255,.22)}
+.trust__k{
+  font-family:var(--util); font-weight:700; text-transform:uppercase;
+  letter-spacing:.1em; font-size:.85rem; opacity:.85; display:block;
+}
+.trust__v{font-weight:800; font-size:1.05rem; line-height:1.3; display:block; margin-top:3px}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{padding:52px 0}
+.section--bone{background:var(--bone)}
+.section--navy{background:var(--navy); color:#fff}
+.section__lede{max-width:60ch; color:#4A5462; margin-bottom:30px}
+.section--navy .section__lede{color:#C0C8D3}
+
+/* SERVICES */
+.svc{display:grid; gap:14px}
+.svc__card{
+  background:var(--paper); border:1px solid #D9D6D0; border-radius:var(--radius);
+  padding:22px; border-top:4px solid var(--navy);
+}
+.svc__card--accent{border-top-color:var(--red)}
+.svc__card h3{margin-bottom:8px}
+.svc__card p{margin:0; color:#525C6A; font-size:.95rem}
+.svc__tag{
+  display:inline-block; margin-bottom:10px;
+  font-family:var(--util); font-weight:700; text-transform:uppercase;
+  letter-spacing:.1em; font-size:.78rem; color:var(--red-deep);
+}
+
+/* WORK GALLERY */
+.work{display:grid; gap:22px}
+.work__fig{margin:0}
+.work__fig img{
+  width:100%; height:230px; object-fit:cover;
+  border-radius:var(--radius); border:1px solid var(--navy-line);
+}
+.work__cap{
+  margin-top:12px; font-size:.95rem; color:#C0C8D3;
+  border-left:3px solid var(--red); padding-left:12px;
+}
+.work__cap b{color:#fff; display:block; font-weight:700}
+
+/* ============================================================
+   WORK ORDER / SERVICE MENU  (signature element)
+   ============================================================ */
+.wo{
+  background:var(--paper); border:2px solid var(--navy);
+  border-radius:var(--radius); overflow:hidden;
+}
+.wo__head{
+  background:var(--navy); color:#fff; padding:14px 18px;
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px;
+  font-family:var(--util); text-transform:uppercase; letter-spacing:.1em;
+}
+.wo__title{font-weight:700; font-size:1.15rem}
+.wo__sub{font-weight:500; font-size:.9rem; color:#AFB8C4}
+.wo__body{padding:8px 18px 20px}
+
+.wo__group{padding:16px 0 6px; border-top:1px dashed #C9C6C0}
+.wo__group:first-child{border-top:0}
+.wo__groupname{
+  font-family:var(--util); font-weight:700; text-transform:uppercase;
+  letter-spacing:.12em; font-size:.95rem; color:var(--navy);
+  margin-bottom:8px;
+}
+.wo__row{display:flex; align-items:baseline; gap:8px; padding:7px 0}
+.wo__item{font-size:.98rem; color:var(--ink)}
+.wo__dots{flex:1; min-width:16px; border-bottom:1px dotted #B6B2AB; transform:translateY(-4px)}
+.wo__price{
+  font-family:var(--util); font-weight:600; font-size:1rem;
+  letter-spacing:.05em; color:#6B7480; white-space:nowrap;
+}
+.wo__note{
+  background:var(--bone); border-top:2px solid var(--navy);
+  padding:16px 18px; font-size:.92rem; color:#4A5462;
+}
+.wo__note b{color:var(--navy)}
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.rev{display:grid; gap:26px; align-items:start}
+.rev__score{
+  background:var(--navy-deep); color:#fff; border-radius:var(--radius);
+  padding:26px; text-align:center;
+}
+.rev__num{font-family:var(--util); font-weight:700; font-size:3.6rem; line-height:1; color:#fff}
+.rev__stars{color:#F5B72E; letter-spacing:.18em; font-size:1.15rem; margin:6px 0 4px}
+.rev__count{font-family:var(--util); text-transform:uppercase; letter-spacing:.1em; font-size:.9rem; color:#AFB8C4}
+.rev__quote{
+  margin:0; font-size:1.2rem; font-weight:600; line-height:1.45; color:var(--ink);
+  border-left:4px solid var(--red); padding-left:18px;
+}
+.rev__attr{
+  display:block; margin-top:12px;
+  font-family:var(--util); text-transform:uppercase; letter-spacing:.1em;
+  font-size:.88rem; font-weight:600; color:#6B7480;
+}
+.rev__points{list-style:none; margin:22px 0 0; padding:0}
+.rev__points li{
+  padding:9px 0 9px 26px; position:relative; color:#4A5462; font-size:.97rem;
+  border-top:1px solid #D9D6D0;
+}
+.rev__points li::before{
+  content:"✓"; position:absolute; left:0; top:9px; color:var(--red-deep); font-weight:900;
+}
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+.loc{display:grid; gap:24px}
+.map{
+  border:2px solid var(--navy); border-radius:var(--radius); overflow:hidden;
+  background:#DDE0E4; line-height:0;
+}
+.map iframe{width:100%; height:300px; border:0; display:block}
+.map__actions{display:grid; gap:10px; margin-top:14px}
+
+.info{display:grid; gap:22px}
+.info__block h3{
+  font-family:var(--util); font-weight:700; text-transform:uppercase;
+  letter-spacing:.12em; font-size:1rem; color:var(--red-pale); margin-bottom:10px;
+}
+.info__big{
+  font-family:var(--util); font-weight:700; font-size:2rem; letter-spacing:.02em;
+  color:#fff; text-decoration:none; line-height:1.15; display:inline-block;
+}
+.info__big:hover{color:var(--red-bright)}
+.info__addr{color:#C0C8D3; font-style:normal; line-height:1.7}
+.info__addr a{color:#fff}
+
+.hours{width:100%; border-collapse:collapse; font-family:var(--util); font-size:1.1rem}
+.hours th, .hours td{
+  text-align:left; padding:9px 0; border-bottom:1px solid var(--navy-line);
+  font-weight:500; letter-spacing:.03em;
+}
+.hours th{color:#AFB8C4; width:52%; font-weight:600}
+.hours td{color:#fff; text-align:right}
+.hours tr.is-today th, .hours tr.is-today td{color:var(--red-bright); font-weight:700}
+.hours td.is-closed{color:#8A93A0}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{background:var(--navy-deep); color:#8A93A0; padding:34px 0; border-top:1px solid var(--navy-line)}
+.foot__grid{display:grid; gap:20px}
+.foot__name{color:#fff; font-weight:800; font-size:1.1rem; margin-bottom:4px}
+.foot__links{display:flex; flex-wrap:wrap; gap:0 20px; font-family:var(--util); letter-spacing:.06em; font-size:1.02rem}
+.foot__links a{color:#C0C8D3; text-decoration:none; display:inline-block; padding:9px 0}
+.foot__links a:hover{color:var(--red-bright)}
+.foot__legal{font-size:.85rem; line-height:1.6}
+
+/* ============================================================
+   STICKY MOBILE CALL BAR
+   ============================================================ */
+.callbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:90;
+  display:grid; grid-template-columns:1.4fr 1fr; gap:10px;
+  background:var(--navy-deep);
+  border-top:1px solid var(--navy-line);
+  padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));
+}
+.callbar .btn{padding:14px 12px; font-size:1rem}
+
+/* ============================================================
+   DESKTOP  (>=900px) — different layout, not just wider
+   ============================================================ */
+@media (min-width:900px){
+  body{padding-bottom:0}
+  .callbar{display:none}
+
+  .top__inner{min-height:72px; gap:20px}
+  .top__mark{width:44px; height:44px}
+  .top__nav{
+    display:flex; gap:26px; margin-left:24px;
+    font-family:var(--util); font-weight:600; text-transform:uppercase;
+    letter-spacing:.09em; font-size:1.02rem;
+  }
+  .top__nav a{color:#C0C8D3; text-decoration:none}
+  .top__nav a:hover{color:#fff}
+  .status{margin-left:auto}
+  .top__cta{
+    display:inline-flex; background:var(--red); color:#fff; text-decoration:none;
+    font-weight:800; padding:11px 20px; border-radius:var(--radius); font-size:1rem;
+  }
+  .top__cta:hover{background:var(--red-bright)}
+
+  .hero{padding:96px 0 92px}
+  .hero__actions{flex-direction:row; flex-wrap:wrap}
+  .hero__meta{margin-top:44px; padding-top:26px; gap:12px 64px; font-size:1.12rem}
+
+  .trust__grid{grid-template-columns:repeat(4,1fr); gap:0}
+  .trust__item{padding:24px 26px 24px 0}
+  .trust__item + .trust__item{border-top:0; border-left:1px solid rgba(255,255,255,.22); padding-left:26px}
+
+  .section{padding:84px 0}
+  .svc{grid-template-columns:repeat(3,1fr); gap:20px}
+  .svc__card{padding:28px}
+
+  .work{grid-template-columns:1fr 1fr; gap:30px}
+  .work__fig img{height:330px}
+
+  .wo__body{padding:14px 30px 26px; display:grid; grid-template-columns:1fr 1fr; gap:0 44px; align-items:start}
+  .wo__group{padding:16px 0 10px}
+  .wo__group:nth-child(-n+2){border-top:0; padding-top:6px}
+  .wo__note{padding:18px 30px}
+
+  .rev{grid-template-columns:300px 1fr; gap:46px; align-items:center}
+  .rev__quote{font-size:1.45rem}
+
+  .loc{grid-template-columns:1.35fr 1fr; gap:46px}
+  .map iframe{height:420px}
+  .map__actions{grid-template-columns:1fr 1fr}
+
+  .foot__grid{grid-template-columns:1.2fr 1fr 1fr; gap:40px; align-items:start}
+}
+
+@media (min-width:1100px){
+  .hero h1{font-size:3.9rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important}
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="top">
+  <div class="wrap top__inner">
+    <img class="top__mark" src="images/kidds-logo.jpg" alt="">
+    <span class="top__name">Kidd's Auto<br>Repair</span>
+
+    <nav class="top__nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#menu">Service Menu</a>
+      <a href="#work">Our Work</a>
+      <a href="#location">Location</a>
+    </nav>
+
+    <span class="status" id="status" aria-live="polite">
+      <span class="status__dot"></span><span id="statusText">Hours</span>
+    </span>
+
+    <a class="top__cta" href="tel:+16068758154">(606) 875-8154</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero__inner">
+    <div>
+      <h1>Auto and truck repair in Somerset, Kentucky</h1>
+      <p class="hero__lede">Cars, trucks, side-by-sides, and motorcycles. We tell you what the job costs before we start it.</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--call" href="tel:+16068758154">Call (606) 875-8154</a>
+        <a class="btn btn--ghost" href="#menu">See what we work on</a>
+      </div>
+
+      <div class="hero__meta">
+        <span><strong>100 Wilderness Rd</strong>, Somerset, KY 42503</span>
+        <span>Mon&ndash;Fri <strong>9AM&ndash;5PM</strong></span>
+        <span>Serving <strong>Pulaski County</strong> &amp; Lake Cumberland</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust__grid">
+      <div class="trust__item">
+        <span class="trust__k">Rated</span>
+        <span class="trust__v">5.0 on Google</span>
+      </div>
+      <div class="trust__item">
+        <span class="trust__k">Owned by</span>
+        <span class="trust__v">A local family</span>
+      </div>
+      <div class="trust__item">
+        <span class="trust__k">Estimates</span>
+        <span class="trust__v">Quoted up front</span>
+      </div>
+      <div class="trust__item">
+        <span class="trust__k">We work on</span>
+        <span class="trust__v">Cars, trucks &amp; powersports</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <p class="eyebrow">What we do</p>
+    <h2>Services</h2>
+    <p class="section__lede">If it has wheels and it is broke, call us and describe it. If it is not something we take on, we will tell you straight and point you somewhere that does.</p>
+
+    <div class="svc">
+      <article class="svc__card">
+        <span class="svc__tag">Brakes &amp; Suspension</span>
+        <h3>Stopping and riding right</h3>
+        <p>Pads, rotors, calipers, and brake lines. Shocks, struts, ball joints, leaf springs, and lift and leveling work on trucks.</p>
+      </article>
+
+      <article class="svc__card">
+        <span class="svc__tag">Engine</span>
+        <h3>Diagnostics and repair</h3>
+        <p>Check engine lights, no-starts, misfires, overheating, belts, hoses, water pumps, and tune-ups.</p>
+      </article>
+
+      <article class="svc__card">
+        <span class="svc__tag">Driveline</span>
+        <h3>Transmission and axles</h3>
+        <p>U-joints, CV axles, wheel bearings, clutches, differentials, and transfer cases. Front and rear end noises tracked down.</p>
+      </article>
+
+      <article class="svc__card">
+        <span class="svc__tag">Maintenance</span>
+        <h3>Keeping it on the road</h3>
+        <p>Oil and filter changes, fluid services, batteries, alternators, starters, tires, and pre-trip checkovers.</p>
+      </article>
+
+      <article class="svc__card svc__card--accent">
+        <span class="svc__tag">Powersports</span>
+        <h3>ATV, UTV, and side-by-side</h3>
+        <p>Full suspension and driveline work on Can-Am, Polaris, Arctic Cat, and more. Belts, clutches, A-arms, and axles.</p>
+      </article>
+
+      <article class="svc__card svc__card--accent">
+        <span class="svc__tag">Custom</span>
+        <h3>Motorcycles and builds</h3>
+        <p>Bike service and repair, plus custom and bobber builds. Fabrication, wiring, and one-off work by arrangement.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR WORK ============ -->
+<section class="section section--navy" id="work">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">Out of the shop</p>
+    <h2>Our work</h2>
+    <p class="section__lede">Not every shop in Pulaski County will take a side-by-side apart down to the frame or wire up a custom bike. We will.</p>
+
+    <div class="work">
+      <figure class="work__fig">
+        <img src="images/utv-suspension-rebuild.jpg" alt="A Can-Am side-by-side on jack stands in the shop with the rear suspension, axles, and A-arms removed.">
+        <figcaption class="work__cap">
+          <b>Side-by-side rear end, stripped</b>
+          Rear suspension and driveline pulled down for a full rebuild. Same work we do on trucks, just smaller and muddier.
+        </figcaption>
+      </figure>
+
+      <figure class="work__fig">
+        <img src="images/yamaha-bobber-build.jpg" alt="A Yamaha XS650 bobber motorcycle build in progress with a primered tank and hardtail frame.">
+        <figcaption class="work__cap">
+          <b>Yamaha bobber build</b>
+          Custom frame and tank work in progress. Bring us a project and we will talk through what it takes.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICE MENU ============ -->
+<section class="section section--bone" id="menu">
+  <div class="wrap">
+    <p class="eyebrow">Common jobs</p>
+    <h2>Services Offered</h2>
+    <p class="section__lede">Prices depend on the vehicle and the parts it takes, so we quote every job before we touch it. Call with your year, make, model, and engine size and we will give you a number.</p>
+
+    <!-- ==========================================================
+         SERVICE MENU — HOW TO EDIT
+         Every price currently reads "Call for quote".
+         To publish a real price, replace ONLY the text inside
+         <span class="wo__price"> ... </span>  e.g.  $49.95
+         To add a line item, copy one whole <div class="wo__row"> block.
+         To add a category, copy one whole <div class="wo__group"> block.
+         ========================================================== -->
+    <div class="wo">
+      <div class="wo__head">
+        <span class="wo__title">Estimate Sheet</span>
+        <span class="wo__sub">Kidd's Auto Repair &middot; Somerset, KY</span>
+      </div>
+
+      <div class="wo__body">
+
+        <div class="wo__group">
+          <p class="wo__groupname">Maintenance</p>
+          <div class="wo__row"><span class="wo__item">Oil and filter change</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Tire rotation</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Battery test and replacement</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Coolant flush</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Transmission fluid service</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+        </div>
+
+        <div class="wo__group">
+          <p class="wo__groupname">Brakes &amp; Suspension</p>
+          <div class="wo__row"><span class="wo__item">Front brake pads and rotors</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Rear brakes</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Shocks or struts</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Leaf spring replacement or upgrade</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Lift or leveling kit install</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Ball joints and tie rods</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+        </div>
+
+        <div class="wo__group">
+          <p class="wo__groupname">Engine &amp; Driveline</p>
+          <div class="wo__row"><span class="wo__item">Check engine light diagnostic</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Tune-up and spark plugs</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Alternator or starter</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Water pump or thermostat</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">CV axle or U-joint</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Wheel bearing / hub</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+        </div>
+
+        <div class="wo__group">
+          <p class="wo__groupname">ATV, UTV &amp; Motorcycle</p>
+          <div class="wo__row"><span class="wo__item">Side-by-side belt and clutch service</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">A-arm, axle, or bushing replacement</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">ATV / UTV full service</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Motorcycle service and repair</span><span class="wo__dots"></span><span class="wo__price">Call for quote</span></div>
+          <div class="wo__row"><span class="wo__item">Custom build and fabrication</span><span class="wo__dots"></span><span class="wo__price">By the job</span></div>
+        </div>
+
+      </div>
+
+      <p class="wo__note">
+        <b>Nothing gets done without your say-so.</b> We look it over, call you with a price, and wait for a yes before we start. Text a photo of the problem to <a href="sms:+16068758154">(606) 875-8154</a> if that is easier than explaining it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow">What people say</p>
+    <h2>Reviews</h2>
+
+    <div class="rev">
+      <div class="rev__score">
+        <p class="rev__num">5.0</p>
+        <p class="rev__stars" aria-hidden="true">★★★★★</p>
+        <p class="rev__count">3 Google reviews</p>
+      </div>
+
+      <div>
+        <blockquote class="rev__quote">
+          "The people are nice, fair, and most importantly, they're honest."
+          <cite class="rev__attr">Google review, Kidd's Auto Repair</cite>
+        </blockquote>
+
+        <ul class="rev__points">
+          <li>Customers point to fair, reasonable pricing.</li>
+          <li>Truck suspension work turned around quickly.</li>
+          <li>You deal with the people doing the work, not a service desk.</li>
+        </ul>
+
+        <p style="margin-top:22px">
+          <a class="btn btn--outline" href="https://search.google.com/local/reviews?placeid=ChIJkfQQdVRJXYgR0r4iHtxXxks" target="_blank" rel="noopener">Read all reviews on Google</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION & CONTACT ============ -->
+<section class="section section--navy" id="location">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">Find us</p>
+    <h2>Location and hours</h2>
+    <p class="section__lede">We are on Wilderness Road in Somerset, serving Pulaski County and the Lake Cumberland area.</p>
+
+    <div class="loc">
+      <div>
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps?q=Kidds+Auto+Repair,+100+Wilderness+Rd,+Somerset,+KY+42503&output=embed"
+            title="Map showing Kidd's Auto Repair at 100 Wilderness Rd, Somerset, KY 42503"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+        <div class="map__actions">
+          <a class="btn btn--call" href="https://www.google.com/maps/dir/?api=1&destination=100+Wilderness+Rd%2C+Somerset%2C+KY+42503&destination_place_id=ChIJkfQQdVRJXYgR0r4iHtxXxks" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn--ghost" href="https://www.google.com/maps/search/?api=1&query=37.076258%2C-84.6697438&query_place_id=ChIJkfQQdVRJXYgR0r4iHtxXxks" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="info__block">
+          <h3>Call or text</h3>
+          <a class="info__big" href="tel:+16068758154">(606) 875-8154</a>
+        </div>
+
+        <div class="info__block">
+          <h3>Address</h3>
+          <address class="info__addr">
+            Kidd's Auto Repair<br>
+            100 Wilderness Rd<br>
+            Somerset, KY 42503
+          </address>
+        </div>
+
+        <div class="info__block">
+          <h3>Hours</h3>
+          <table class="hours">
+            <tbody>
+              <tr data-day="1"><th scope="row">Monday</th><td>9AM &ndash; 5PM</td></tr>
+              <tr data-day="2"><th scope="row">Tuesday</th><td>9AM &ndash; 5PM</td></tr>
+              <tr data-day="3"><th scope="row">Wednesday</th><td>9AM &ndash; 5PM</td></tr>
+              <tr data-day="4"><th scope="row">Thursday</th><td>9AM &ndash; 5PM</td></tr>
+              <tr data-day="5"><th scope="row">Friday</th><td>9AM &ndash; 5PM</td></tr>
+              <tr data-day="6"><th scope="row">Saturday</th><td class="is-closed">Closed</td></tr>
+              <tr data-day="0"><th scope="row">Sunday</th><td class="is-closed">Closed</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info__block">
+          <h3>Also find us on</h3>
+          <p style="margin:0">
+            <a class="btn btn--ghost" href="https://www.facebook.com/Kiddsauto/" target="_blank" rel="noopener">Facebook page</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div>
+      <p class="foot__name">Kidd's Auto Repair</p>
+      <p style="margin:0">100 Wilderness Rd, Somerset, KY 42503<br>
+      <a href="tel:+16068758154" style="color:#fff">(606) 875-8154</a></p>
+    </div>
+
+    <div>
+      <p class="foot__links">
+        <a href="#services">Services</a>
+        <a href="#menu">Service Menu</a>
+        <a href="#work">Our Work</a>
+        <a href="#location">Location</a>
+        <a href="https://www.facebook.com/Kiddsauto/" target="_blank" rel="noopener">Facebook</a>
+      </p>
+    </div>
+
+    <div>
+      <p class="foot__legal">
+        Serving Somerset, Ferguson, Burnside, Science Hill, Eubank, Nancy, and Pulaski County, Kentucky.<br><br>
+        &copy; <span id="year">2026</span> Kidd's Auto Repair.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ STICKY MOBILE CALL BAR ============ -->
+<div class="callbar">
+  <a class="btn btn--call" href="tel:+16068758154">Call the shop</a>
+  <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&destination=100+Wilderness+Rd%2C+Somerset%2C+KY+42503&destination_place_id=ChIJkfQQdVRJXYgR0r4iHtxXxks" target="_blank" rel="noopener">Directions</a>
+</div>
+
+<!-- ============ STRUCTURED DATA (Google local search) ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Kidd's Auto Repair",
+  "image": "images/kidds-logo.jpg",
+  "telephone": "+1-606-875-8154",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "100 Wilderness Rd",
+    "addressLocality": "Somerset",
+    "addressRegion": "KY",
+    "postalCode": "42503",
+    "addressCountry": "US"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 37.076258, "longitude": -84.6697438 },
+  "sameAs": ["https://www.facebook.com/Kiddsauto/"],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "09:00",
+    "closes": "17:00"
+  }],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "3" },
+  "areaServed": ["Somerset, KY","Ferguson, KY","Burnside, KY","Science Hill, KY","Eubank, KY","Nancy, KY","Pulaski County, KY"],
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brake repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Suspension and lift kit installation" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Engine diagnostics and repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Transmission and driveline repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ATV and UTV repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Motorcycle repair and custom builds" } }
+  ]
+}
+</script>
+
+<script>
+// Shop hours: Mon-Fri 9:00-17:00 America/New_York. Edit OPEN_MIN / CLOSE_MIN / OPEN_DAYS to change.
+const OPEN_DAYS = [1,2,3,4,5];
+const OPEN_MIN = 9 * 60;
+const CLOSE_MIN = 17 * 60;
+const DAY_INDEX = { Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6 };
+
+const parts = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23'
+}).formatToParts(new Date());
+
+const field = type => parts.find(p => p.type === type).value;
+const dayNum = DAY_INDEX[field('weekday')];
+const nowMin = Number(field('hour')) * 60 + Number(field('minute'));
+const isOpen = OPEN_DAYS.includes(dayNum) && nowMin >= OPEN_MIN && nowMin < CLOSE_MIN;
+
+const statusEl = document.getElementById('status');
+statusEl.classList.add(isOpen ? 'is-open' : 'is-closed');
+document.getElementById('statusText').textContent = isOpen ? 'Open now' : 'Closed now';
+
+const todayRow = document.querySelector('.hours tr[data-day="' + dayNum + '"]');
+if (todayRow) todayRow.classList.add('is-today');
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
